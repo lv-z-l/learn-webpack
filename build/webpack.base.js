@@ -1,5 +1,4 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const chalk = require('chalk')
@@ -92,14 +91,6 @@ module.exports = {
   },
   plugins: [
     // 刚才的代码...
-    new HtmlWebpackPlugin({
-      // 选择模板 public/index.html
-      template: './public/index.html',
-      // 打包后的名字
-      filename: 'index.html',
-      // js文件插入 body里
-      inject: 'body'
-    }),
     new VueLoaderPlugin(),
     new ProgressBarPlugin({
       format: ` build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`

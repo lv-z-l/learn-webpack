@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
@@ -41,6 +42,27 @@ module.exports = merge(base, {
     ]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      // 选择模板 public/index.html
+      template: './public/index.html',
+      // 打包后的名字
+      filename: 'index.html',
+      // js文件插入 body里
+      inject: 'body',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      },
+      chunksSortMode: 'dependency'
+    }),
     new webpack.DefinePlugin({
       process: {
         env: ENV
